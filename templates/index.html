@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -48,7 +48,7 @@
         });
 
         const data = await response.json();
-        document.getElementById("summaryOutput").innerText = data.summary;
+        document.getElementById("summaryOutput").innerText = data.summary || "Failed to summarize text.";
       } 
       else if (pdfFile) {
         const formData = new FormData();
@@ -64,7 +64,7 @@
         if (data.summary) {
           document.getElementById("summaryOutput").innerText = data.summary;
         } else {
-          document.getElementById("summaryOutput").innerText = "Failed to summarize PDF.";
+          document.getElementById("summaryOutput").innerText = data.error || "Failed to summarize PDF.";
         }
       }
     }
