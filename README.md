@@ -4,8 +4,6 @@ A web application for **extractive text summarization** using **BERT embeddings*
 Built with **Flask**, **HTML/CSS/JS**, and powered by **bert-extractive-summarizer** for accurate, context-aware sentence extraction.  
 It also supports uploading **PDF files** and customizing the **length** of the summary (Short, Medium, Long)!
 
-![Text Summarizer Screenshot](#) <!-- You can update this link later -->
-
 ---
 
 ## 🚀 Features
@@ -19,23 +17,6 @@ It also supports uploading **PDF files** and customizing the **length** of the s
 
 ---
 
-## 📂 Project Structure
-
-```
-text-summarizer/
-├── app.py              # Flask application
-├── summarizer.py       # Summarization logic (BERT model)
-├── templates/
-│   └── index.html      # Frontend HTML page
-├── static/
-│   └── style.css       # Styling for frontend
-├── uploads/            # Uploaded PDF files
-├── venv/               # Python virtual environment (optional)
-├── requirements.txt    # Python dependencies
-└── README.md           # Project documentation
-```
-
----
 
 ## ⚙️ Setup Instructions
 
@@ -83,12 +64,6 @@ The app will be available at [http://127.0.0.1:5000/](http://127.0.0.1:5000/).
 - spaCy
 - scikit-learn
 - nltk
-
----
-
-## 📸 Demo Screenshot
-
-*(Add a nice screenshot here later if you want!)*
 
 ---
 
