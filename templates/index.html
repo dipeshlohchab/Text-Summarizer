@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Text Summarizer</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>📝 Extractive Text Summarizer</h1>
+
+    <h2>Enter Text or Upload a PDF:</h2>
+    <textarea id="inputText" placeholder="Paste your text here..."></textarea>
+
+    <input type="file" id="pdfFile" accept="application/pdf" />
+
+    <h2>Select Summary Length:</h2>
+    <select id="summaryLength">
+      <option value="short">Short</option>
+      <option value="medium" selected>Medium</option>
+      <option value="long">Long</option>
+    </select>
+
+    <button onclick="summarize()">Summarize</button>
+
+    <h2>Summary:</h2>
+    <div id="summaryOutput"></div>
+  </div>
+
+  <script>
+    async function summarize() {
+      const inputText = document.getElementById("inputText").value.trim();
+      const pdfFile = document.getElementById("pdfFile").files[0];
+      const length = document.getElementById("summaryLength").value;
+
+      if (!inputText && !pdfFile) {
+        alert("Please enter text or upload a PDF file.");
+        return;
+      }
+
+      document.getElementById("summaryOutput").innerHTML = "<em>Summarizing, please wait...</em>";
+
+      if (inputText) {
+        const response = await fetch("/summarize", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ text: inputText, length: length }),
+        });
+
+        const data = await response.json();
+        document.getElementById("summaryOutput").innerText = data.summary;
+      } 
+      else if (pdfFile) {
+        const formData = new FormData();
+        formData.append("pdf", pdfFile);
+        formData.append("length", length);
+
+        const response = await fetch("/upload_pdf", {
+          method: "POST",
+          body: formData,
+        });
+
+        const data = await response.json();
+        if (data.summary) {
+          document.getElementById("summaryOutput").innerText = data.summary;
+        } else {
+          document.getElementById("summaryOutput").innerText = "Failed to summarize PDF.";
+        }
+      }
+    }
+  </script>
+</body>
+</html>
